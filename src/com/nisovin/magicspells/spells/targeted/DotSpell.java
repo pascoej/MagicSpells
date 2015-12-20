@@ -123,10 +123,10 @@ public class DotSpell extends TargetedSpell implements TargetedEntitySpell, Spel
 			if (preventKnockback) {
 				// bukkit doesn't call a damage event here, so we'll do it ourselves
 				@SuppressWarnings("deprecation")
-				EntityDamageByEntityEvent event = new EntityDamageByEntityEvent(caster, target, DamageCause.ENTITY_ATTACK, damage);
-				Bukkit.getPluginManager().callEvent(event);
-				if (!event.isCancelled()) {
-					target.damage(event.getDamage());
+				EntityDamageByEntityEvent event2 = new EntityDamageByEntityEvent(caster, target, DamageCause.ENTITY_ATTACK, damage);
+				Bukkit.getPluginManager().callEvent(event2);
+				if (!event2.isCancelled()) {
+					target.damage(event2.getDamage());
 				}
 			} else {
 				target.damage(dam, caster);
