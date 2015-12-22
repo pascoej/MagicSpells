@@ -141,18 +141,19 @@ public class AreaEffectSpell extends TargetedSpell implements TargetedLocationSp
 	private boolean doAoe(Player player, Location location, float basePower) {
 		int count = 0;
 		
-		Vector facing = player.getLocation().getDirection();
-		Vector vLoc = player.getLocation().toVector();
-		
 		BoundingBox box = new BoundingBox(location, radius, verticalRadius);
 		List<Entity> entities = new ArrayList<Entity>(location.getWorld().getEntitiesByClasses(LivingEntity.class));
 		Collections.shuffle(entities);
 		for (Entity e : entities) {
 			if (e instanceof LivingEntity && box.contains(e)) {
-				if (pointBlank && cone > 0) {
-					Vector dir = e.getLocation().toVector().subtract(vLoc);
-					if (Math.abs(dir.angle(facing)) > cone) {
-						continue;
+				if (player != null) {
+					Vector facing = player.getLocation().getDirection();
+					Vector vLoc = player.getLocation().toVector();
+					if (pointBlank && cone > 0) {
+						Vector dir = e.getLocation().toVector().subtract(vLoc);
+						if (Math.abs(dir.angle(facing)) > cone) {
+							continue;
+						}
 					}
 				}
 				LivingEntity target = (LivingEntity)e;
